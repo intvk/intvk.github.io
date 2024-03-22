@@ -1,0 +1,168 @@
+body {
+    background-color: #1e1e1e; /* Черный цвет фона */
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+@keyframes emojiAnimation {
+    0% {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100px) rotate(360deg);
+    }
+}
+
+.smiley {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0;
+    animation: emojiAnimation 1.5s ease-out forwards;
+    /* Добавляем ограничение размеров экрана */
+    max-width: 100vw;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+
+
+.dice {
+    width: 100px; /* Увеличил размер кубика */
+    height: 100px; /* Увеличил размер кубика */
+    transform-style: preserve-3d;
+    transition: transform 1.5s ease-out;
+    margin: 20px; /* Добавлено расстояние между кубиками */
+}
+
+.dice:hover {
+    cursor: pointer;
+}
+
+.sides {
+    background-color: #292929; /* Цвет граней кубика */
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.1); /* Тень на гранях */
+}
+
+.word {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: #fff; /* Белый цвет текста */
+}
+
+.side-1 {
+    transform: translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
+}
+
+.side-2 {
+    transform: rotateY(-180deg) translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
+}
+
+.side-3 {
+    transform: rotateY(90deg) translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
+}
+
+.side-4 {
+    transform: rotateY(-90deg) translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
+}
+
+.side-5 {
+    transform: rotateX(90deg) translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
+}
+
+.side-6 {
+    transform: rotateX(-90deg) translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
+}
+
+.dice[data-side="1"] {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(720deg);
+}
+
+.dice[data-side="2"] {
+    transform: rotateX(360deg) rotateY(540deg) rotateZ(720deg);
+}
+
+.dice[data-side="3"] {
+    transform: rotateX(360deg) rotateY(630deg) rotateZ(720deg);
+}
+
+.dice[data-side="4"] {
+    transform: rotateX(360deg) rotateY(450deg) rotateZ(720deg);
+}
+
+.dice[data-side="5"] {
+    transform: rotateX(630deg) rotateY(360deg) rotateZ(720deg);
+}
+
+.dice[data-side="6"] {
+    transform: rotateX(450deg) rotateY(360deg) rotateZ(720deg);
+}
+
+.dice[data-side="1"].reRoll {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.dice[data-side="2"].reRoll {
+    transform: rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+}
+
+.dice[data-side="3"].reRoll {
+    transform: rotateX(0deg) rotateY(270deg) rotateZ(0deg);
+}
+
+.dice[data-side="4"].reRoll {
+    transform: rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+}
+
+.dice[data-side="5"].reRoll {
+    transform: rotateX(270deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.dice[data-side="6"].reRoll {
+    transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+}
+
+#diceResult {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50; /* Зеленый цвет фона для результата */
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+}
+
+#diceResult.hide {
+    opacity: 0;
+}
+
+#diceResult.reveal {
+    animation: fadeUp 0.3s forwards;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        bottom: 0;
+    }
+
+    100% {
+        opacity: 1;
+        bottom: 20px;
+    }
+}
