@@ -1,8 +1,11 @@
 // Ваш JavaScript код
 let dice1 = document.getElementById('dice1');
 let dice2 = document.getElementById('dice2');
-var outputDiv = document.getElementById('diceResult');
-var smileyContainer = document.getElementById('smileyContainer'); // Добавили контейнер для смайликов
+let outputDiv = document.getElementById('diceResult');
+let smileyContainer = document.getElementById('smileyContainer');
+
+// Список различных смайликов
+let smileyOptions = ['😄', '😎', '😊', '🥳', '😜', '🤩', '😇'];
 
 function rollDice() {
     let result1 = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
@@ -22,10 +25,12 @@ function rollDice() {
     outputDiv.innerHTML = "Ты получил " + result1 + " и " + result2;
     setTimeout(function(){ outputDiv.classList.add("reveal"); }, 1500);
 
-    // Добавление смайликов в контейнер
+    // Добавление случайного смайлика в контейнер
     for (let i = 0; i < 10; i++) {
         let smiley = document.createElement('div');
-        smiley.innerText = '😄'; // Любой смайлик, который вам нравится
+        let randomSmileyIndex = Math.floor(Math.random() * smileyOptions.length);
+        let randomSmiley = smileyOptions[randomSmileyIndex];
+        smiley.innerText = randomSmiley; // Выбираем случайный смайлик из списка
         smiley.classList.add('smiley');
         let randomX = Math.floor(Math.random() * window.innerWidth);
         let randomY = Math.floor(Math.random() * window.innerHeight);
@@ -44,3 +49,23 @@ rollDice();
 // Добавляем обработчики событий на кубики
 dice1.addEventListener("click", rollDice);
 dice2.addEventListener("click", rollDice);
+
+function updateDiceText() {
+    let dice1TextElement = document.getElementById('dice1Text');
+    let dice2TextElement = document.getElementById('dice2Text');
+    let dice1Text = JSON.parse(dice1TextElement.value.replace(/'/g, "\""));
+    let dice2Text = JSON.parse(dice2TextElement.value.replace(/'/g, "\""));
+
+    // Устанавливаем текст для кубиков
+    let sides1 = dice1.getElementsByClassName('word');
+    let sides2 = dice2.getElementsByClassName('word');
+
+    for (let i = 0; i < sides1.length; i++) {
+        sides1[i].innerText = dice1Text[i] || 'Unknown';
+    }
+
+    for (let i = 0; i < sides2.length; i++) {
+        sides2[i].innerText = dice2Text[i] || 'Unknown';
+    }
+}
+
