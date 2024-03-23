@@ -1,4 +1,4 @@
-// Ваш JavaScript код
+// Объявление переменных для элементов страницы
 let dice1 = document.getElementById('dice1');
 let dice2 = document.getElementById('dice2');
 let outputDiv = document.getElementById('diceResult');
@@ -7,6 +7,7 @@ let smileyContainer = document.getElementById('smileyContainer');
 // Список различных смайликов
 let smileyOptions = ['😄', '😎', '😊', '🥳', '😜', '🤩', '😇'];
 
+// Функция броска кубиков
 function rollDice() {
     let result1 = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
     let result2 = Math.floor(Math.random() * (6 - 1 + 1)) + 1;
@@ -43,6 +44,29 @@ function rollDice() {
     }
 }
 
+// Функция для показа/скрытия меню опций
+function toggleOptionsMenu() {
+    let optionsMenu = document.getElementById('optionsMenu');
+    let menuIcon = document.getElementById('menuIcon');
+    optionsMenu.classList.toggle('show'); // Переключаем класс для изменения видимости меню
+    menuIcon.classList.toggle('hide'); // Скрываем или показываем иконку меню
+}
+
+// Функция для показа/скрытия меню продвинутых настроек
+function toggleAdvancedSettings() {
+    let advancedSettingsMenu = document.getElementById('advancedSettingsMenu');
+    advancedSettingsMenu.classList.toggle('show'); // Переключаем класс для изменения видимости блока продвинутых настроек
+
+    // Получаем элемент стрелочки
+    let arrowElement = document.getElementById('advancedSettingsArrow');
+    // Получаем текущее состояние отображения меню продвинутых настроек
+    let isMenuShown = advancedSettingsMenu.classList.contains('show');
+    // Изменяем текст стрелочки в зависимости от состояния меню
+    arrowElement.innerHTML = isMenuShown ? '&#9650;' : '&#9660;';
+}
+
+
+
 // Вызываем функцию rollDice() при загрузке страницы
 rollDice();
 
@@ -50,6 +74,47 @@ rollDice();
 dice1.addEventListener("click", rollDice);
 dice2.addEventListener("click", rollDice);
 
+document.addEventListener('click', function(event) {
+    let optionsMenu = document.getElementById('optionsMenu');
+    let menuIcon = document.getElementById('menuIcon');
+    // Если клик был не по меню и не по иконке меню, скрываем меню и показываем иконку
+    if (!optionsMenu.contains(event.target) && !menuIcon.contains(event.target)) {
+        optionsMenu.classList.remove('show');
+        menuIcon.classList.remove('hide');
+    }
+});
+
+// Функция для обновления списка смайликов
+function updateSmileyBackground() {
+    let smileyTextElement = document.getElementById('smileyText');
+    let newSmileyOptions = JSON.parse(smileyTextElement.value.replace(/'/g, "\""));
+
+    // Очищаем контейнер смайликов
+    smileyContainer.innerHTML = '';
+
+    // Добавляем новые смайлики в контейнер
+    for (let i = 0; i < newSmileyOptions.length; i++) {
+        let smiley = document.createElement('div');
+        smiley.innerText = newSmileyOptions[i];
+        smiley.classList.add('smiley');
+        smileyContainer.appendChild(smiley);
+    }
+}
+
+// Функция для обновления списка смайликов
+function updateSmileys() {
+    let smileyTextElement = document.getElementById('smileyText');
+    let newSmileyOptions = JSON.parse(smileyTextElement.value.replace(/'/g, "\""));
+
+    // Обновляем список смайликов
+    smileyOptions = newSmileyOptions;
+}
+
+// Вызываем функцию updateSmileys() при загрузке страницы
+updateSmileys();
+
+
+// Функция для обновления текста на кубиках
 function updateDiceText() {
     let dice1TextElement = document.getElementById('dice1Text');
     let dice2TextElement = document.getElementById('dice2Text');
@@ -68,4 +133,3 @@ function updateDiceText() {
         sides2[i].innerText = dice2Text[i] || 'Unknown';
     }
 }
-

@@ -5,21 +5,97 @@ body {
     align-items: center;
     justify-content: center;
     perspective: 1000px;
+    margin: 0; /* Убираем отступы по умолчанию */
+    overflow: hidden; /* Запрещаем появление скроллов */
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
 }
 
 #optionsMenu {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1;
+    display: none; /* По умолчанию скрываем меню */
+    position: fixed; /* Фиксируем позицию */
+    top: 20px; /* Отступ от верхнего края */
+    left: 10px; /* Отступ от левого края */
+    z-index: 1; /* Уровень слоя */
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
+    padding: 10px; /* Уменьшаем внутренний отступ */
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 200px; /* Пример ширины меню */
 }
 
-#optionsMenu label,
-#optionsMenu input,
+#optionsMenu.show {
+    display: block; /* Показываем меню при наличии класса show */
+}
+
+#optionsMenu input[type="text"] {
+    display: block;
+    width: calc(100% - 10px); /* Учитываем внутренние отступы и границы */
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Учитываем ширину границы и внутренний отступ */
+}
+
+#optionsMenu button {
+    display: block;
+    width: 100%; /* Растягиваем кнопки на всю доступную ширину */
+    margin-bottom: 10px; /* Отступ между кнопками */
+}
+
+#advancedSettingsArrow {
+    cursor: pointer;
+    margin-top: 20px;
+    color: #fff; /* Цвет стрелочки */
+    font-size: 20px; /* Размер стрелочки */
+}
+
+/* Добавляем стили для показа/скрытия меню продвинутых настроек */
+#advancedSettingsMenu {
+    display: none; /* по умолчанию меню скрыто */
+    margin-top: 10px;
+    padding-top: 10px; /* Добавляем внутренний отступ сверху */
+    border-top: 1px solid rgba(255, 255, 255, 0.5); /* Добавляем разделительную линию сверху */
+}
+
+#advancedSettingsMenu input[type="text"] {
+    display: block;
+    width: calc(100% - 10px); /* Учитываем внутренние отступы и границы */
+    margin-bottom: 10px;
+    box-sizing: border-box; /* Учитываем ширину границы и внутренний отступ */
+}
+
+
+
+
+#advancedSettingsMenu.show {
+    display: block; /* когда добавляется класс 'show', меню становится видимым */
+}
+
+.smiley {
+    font-size: 24px;
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+}
+
+.hide {
+    display: none; /* Скрываем элемент */
+}
+
+#menuIcon {
+    cursor: pointer;
+    position: fixed;
+    top: 20px; /* Расстояние от верхнего края страницы */
+    left: 20px; /* Расстояние от левого края страницы */
+    z-index: 1000; /* Уровень слоя */
+}
+
 #optionsMenu button {
     display: block;
     margin-bottom: 10px;
@@ -68,8 +144,6 @@ button:hover {
     max-height: 100vh;
     overflow: hidden;
 }
-
-
 
 .dice {
     width: 100px; /* Увеличил размер кубика */

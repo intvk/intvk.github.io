@@ -3,6 +3,10 @@
 <head>
     <title>My Dice Game</title>
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 <body>
 <div id="dice1" class="dice" data-side="1">
@@ -52,11 +56,28 @@
     <input type="text" id="dice1Text" placeholder="['Один', 'Два', ...]">
     <label for="dice2Text">Текст для второго кубика:</label>
     <input type="text" id="dice2Text" placeholder="['Один', 'Два', ...]">
-    <button onclick="updateDiceText()">Применить</button>
+    <button onclick="updateSmileys(); continueGame();">Продолжить</button>
+
+    
+    <!-- Стрелочка для развёртывания блока продвинутых настроек -->
+    <div id="advancedSettingsArrow" onclick="toggleAdvancedSettings()">
+        &#9660; <!-- Стрелочка вниз -->
+    </div>
+    <div id="advancedSettingsMenu">
+        <label for="smileyText">Изменить список смайликов:</label>
+        <input type="text" id="smileyText" placeholder="['😄', '😎', ...]">
+    </div>
+</div>
+
+<div id="smileyContainer"></div>
+
+<div id="menuIcon" onclick="toggleOptionsMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
 </div>
 
 <div id="diceResult">Намми по кубику</div>
-<div id="smileyContainer"></div>
 <script src="script.js"></script>
 
 </body>
