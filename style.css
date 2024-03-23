@@ -174,7 +174,9 @@ button:hover {
     transform: translate(-50%, -50%);
     font-size: 16px;
     color: #fff; /* Белый цвет текста */
+    user-select: none; /* Запрещаем выделение текста */
 }
+
 
 .side-1 {
     transform: translateZ(50px); /* Изменено значение, чтобы текст на грани был ближе */
