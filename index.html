@@ -53,10 +53,12 @@
 
 <div id="optionsMenu">
     <label for="dice1Text">Текст для первого кубика:</label>
-    <input type="text" id="dice1Text" placeholder="['Один', 'Два', ...]">
+    <input type="text" id="dice1Text" placeholder="Один, Два, ...">
+    
     <label for="dice2Text">Текст для второго кубика:</label>
-    <input type="text" id="dice2Text" placeholder="['Один', 'Два', ...]">
-    <button onclick="updateSmileys(); continueGame();">Продолжить</button>
+    <input type="text" id="dice2Text" placeholder="Один, Два, ...">
+    
+    <button onclick="updateSmileys(); updateDiceText();">Продолжить</button>
 
     
     <!-- Стрелочка для развёртывания блока продвинутых настроек -->
@@ -64,9 +66,9 @@
         &#9660; <!-- Стрелочка вниз -->
     </div>
     <div id="advancedSettingsMenu">
-        <label for="smileyText">Изменить список смайликов:</label>
-        <input type="text" id="smileyText" placeholder="['😄', '😎', ...]">
-    </div>
+        <label for="smileyText">Список смайликов:</label>
+        <input type="text" id="smileyText" placeholder="😄, 😎, ...">
+    </div>    
 </div>
 
 <div id="smileyContainer"></div>

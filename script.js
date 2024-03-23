@@ -85,30 +85,35 @@ document.addEventListener('click', function(event) {
 });
 
 // Функция для обновления списка смайликов
-function updateSmileyBackground() {
+function updateSmileys() {
     let smileyTextElement = document.getElementById('smileyText');
-    let newSmileyOptions = JSON.parse(smileyTextElement.value.replace(/'/g, "\""));
+    let newSmileyOptions = smileyTextElement.value.trim();
 
-    // Очищаем контейнер смайликов
-    smileyContainer.innerHTML = '';
+    // Устанавливаем новые значения только если они отличаются от текущих
+    if (newSmileyOptions !== "") {
+        // Разделяем строку со смайликами по запятым и удаляем пробелы
+        newSmileyOptions = newSmileyOptions.split(',').map(option => option.trim());
 
-    // Добавляем новые смайлики в контейнер
-    for (let i = 0; i < newSmileyOptions.length; i++) {
-        let smiley = document.createElement('div');
-        smiley.innerText = newSmileyOptions[i];
-        smiley.classList.add('smiley');
-        smileyContainer.appendChild(smiley);
+        if (JSON.stringify(newSmileyOptions) !== JSON.stringify(smileyOptions)) {
+            // Очищаем массив smileyOptions и добавляем новые значения
+            smileyOptions = newSmileyOptions;
+
+            // Очищаем контейнер смайликов
+            smileyContainer.innerHTML = '';
+
+            // Добавляем новые смайлики в контейнер
+            for (let i = 0; i < newSmileyOptions.length; i++) {
+                let smiley = document.createElement('div');
+                smiley.innerText = newSmileyOptions[i];
+                smiley.classList.add('smiley');
+                smileyContainer.appendChild(smiley);
+            }
+        }
     }
 }
 
-// Функция для обновления списка смайликов
-function updateSmileys() {
-    let smileyTextElement = document.getElementById('smileyText');
-    let newSmileyOptions = JSON.parse(smileyTextElement.value.replace(/'/g, "\""));
 
-    // Обновляем список смайликов
-    smileyOptions = newSmileyOptions;
-}
+
 
 // Вызываем функцию updateSmileys() при загрузке страницы
 updateSmileys();
@@ -118,18 +123,28 @@ updateSmileys();
 function updateDiceText() {
     let dice1TextElement = document.getElementById('dice1Text');
     let dice2TextElement = document.getElementById('dice2Text');
-    let dice1Text = JSON.parse(dice1TextElement.value.replace(/'/g, "\""));
-    let dice2Text = JSON.parse(dice2TextElement.value.replace(/'/g, "\""));
 
-    // Устанавливаем текст для кубиков
-    let sides1 = dice1.getElementsByClassName('word');
-    let sides2 = dice2.getElementsByClassName('word');
+    // Получаем тексты для кубиков и разделяем их по запятой, удаляем пробелы
+    let dice1Text = dice1TextElement.value.trim();
+    let dice2Text = dice2TextElement.value.trim();
 
-    for (let i = 0; i < sides1.length; i++) {
-        sides1[i].innerText = dice1Text[i] || 'Unknown';
+    // Устанавливаем текст для кубиков только если введены новые значения
+    if (dice1Text !== "") {
+        let sides1 = dice1.getElementsByClassName('word');
+        let sides1Array = dice1Text.split(',').map(item => item.trim());
+        for (let i = 0; i < sides1.length; i++) {
+            sides1[i].innerText = sides1Array[i] || 'Unknown';
+        }
     }
 
-    for (let i = 0; i < sides2.length; i++) {
-        sides2[i].innerText = dice2Text[i] || 'Unknown';
+    if (dice2Text !== "") {
+        let sides2 = dice2.getElementsByClassName('word');
+        let sides2Array = dice2Text.split(',').map(item => item.trim());
+        for (let i = 0; i < sides2.length; i++) {
+            sides2[i].innerText = sides2Array[i] || 'Unknown';
+        }
     }
 }
+
+
+
